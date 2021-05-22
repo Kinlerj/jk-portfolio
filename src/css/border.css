@@ -1,0 +1,31 @@
+.page-border{
+	position:absolute;
+	border:solid 1px #FFF;
+	border-color:rgba(255,255,255,.4);
+}
+
+/* Border Style */
+.border-top,
+.border-bottom{
+	height:5px;
+	left:20px;
+	right:20px;
+}
+.border-top{
+	top:14px;
+}
+.border-bottom{
+	bottom:14px;
+}
+.border-left,
+.border-right{
+	width:5px;
+	top:20px;
+	bottom:20px;
+}
+.border-right{
+	right:14px;
+}
+.border-left{
+	left:14px;
+}
