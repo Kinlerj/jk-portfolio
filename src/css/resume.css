@@ -6,12 +6,8 @@
     position: relative;
 }
 
-/*.resume > .timeline > .timeline-content {
+.timeline-content {
     padding: 25px;
     border: solid 1px #B6B6B6;
     position: relative;
-}*/
-
-.resume > .timeline > .timeline-content > * > span {
-    margin-right: 10px;
 }

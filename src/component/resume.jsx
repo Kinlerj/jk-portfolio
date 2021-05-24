@@ -1,34 +1,44 @@
 import React, { Component } from 'react'
 import { motion } from "framer-motion"
-import { VerticalTimeline, VerticalTimelineElement }  from 'react-vertical-timeline-component';
+import Timeline from '@material-ui/lab/Timeline';
+import TimelineItem from '@material-ui/lab/TimelineItem';
+import TimelineSeparator from '@material-ui/lab/TimelineSeparator';
+import TimelineConnector from '@material-ui/lab/TimelineConnector';
+import TimelineContent from '@material-ui/lab/TimelineContent';
+import TimelineOppositeContent from '@material-ui/lab/TimelineOppositeContent';
+import TimelineDot from '@material-ui/lab/TimelineDot';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
 
-import { MdSchool, MdWork } from "react-icons/md";
-import 'react-vertical-timeline-component/style.min.css';
+import { School, Work } from '@material-ui/icons';
 import '../css/resume.css'
 
 const timelineItems = [
-    { icon: <MdSchool />, title: "University of Texas at Arlington", subtitle: "Bachelor's Degree: 2012 - 2016", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
-    { icon: <MdWork />, title: "Bottle Rocket Studios", subtitle: "Jun 2016 - Nov 2016", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
-    { icon: <MdWork />, title: "Wipro Limited", subtitle: "Feb 2017 - Mar 2018", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
-    { icon: <MdWork />, title: "Allstate Corporation", subtitle: "Mar 2018 - Present", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
+    { icon: <School />, title: "University of Texas at Arlington", subtitle: "Bachelor's Degree: 2012 - 2016", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
+    { icon: <Work />, title: "Bottle Rocket Studios", subtitle: "Jun 2016 - Nov 2016", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
+    { icon: <Work />, title: "Wipro Limited", subtitle: "Feb 2017 - Mar 2018", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
+    { icon: <Work />, title: "Allstate Corporation", subtitle: "Mar 2018 - Present", text: "Lorem ipsum dolor sit amet, id electram reprimique his, dicta saepe oporteat eos an, esse erat doming at lam. Nec quodsi suscipiantur an, ad graece nemore ocurreret lam, agam ipsum meliore quo ut." },
 ];
 
 export default class Resume extends Component {
     render() {
-
         const items = timelineItems.map(({ icon, title, subtitle, text }) => {
-            return <VerticalTimelineElement
-                    className="timeline-content"
-                    contentStyle={{ background: '#293012', color: '#fff' }}
-                    contentArrowStyle={{ borderRight: '7px solid  #293012' }}
-                    position="right"
-                    iconStyle={{ background: '#293012', color: '#fff' }}
-                    icon={icon}
-                >
-                    <h4>{title}</h4>
-                    <h5>{subtitle}</h5>
-                    <p>{text}</p>
-                </VerticalTimelineElement>
+            return <TimelineItem>
+                <TimelineOppositeContent style={{display: 'none'}} />
+                <TimelineSeparator>
+                    <TimelineDot color="#293012">
+                        {icon}
+                    </TimelineDot>
+                    <TimelineConnector />
+                </TimelineSeparator>
+                <TimelineContent>
+                    <div className="timeline-content sub-section">
+                        <h4>{title}</h4>
+                        <h5>{subtitle}</h5>
+                        <p className="text-block">{text}</p>
+                    </div>
+                </TimelineContent>
+            </TimelineItem>
         })
 
         return (
@@ -50,9 +60,9 @@ export default class Resume extends Component {
                     <h2>My <strong className="color">Timeline</strong></h2>
                 </div>
                 <section className="resume page">
-                    <VerticalTimeline className="timeline" layout="1-column-left">
+                    <Timeline className="timeline" align="left">
                         {items}
-                    </VerticalTimeline>
+                    </Timeline>
                 </section>
             </motion.div>
         );
