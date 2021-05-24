@@ -1,0 +1,82 @@
+@media (max-width: 992px) {
+    .about {
+        padding: 24px;
+    }
+}
+
+@media (min-width: 992px) {
+    .about > * > .left-column {
+        width: 48%;
+        float: left;
+
+        padding: 0 8px 0 8px;
+    }
+
+    .about > * > .right-column {
+        width: 48%;
+        float: left;
+
+        padding: 0 8px 0 8px;
+    }
+
+    .about > * > .left-column-small {
+        width: 30%;
+        float: left;
+
+        padding: 0 8px 0 8px;
+    }
+
+    .about > * > .right-column-large {
+        width: 60%;
+        float: left;
+
+        padding: 0 8px 0 8px;
+    }
+}
+
+.about {
+    text-align: left;
+    align-items: unset;
+    justify-content: unset;
+    padding: 42px;
+}
+
+.about > * {
+    font-size: 14px;
+    padding: 0 5% 0 5%;
+}
+
+.about > .about-section > * {
+    min-height: 1px;
+    padding-right: 16px;
+    padding-left: 16px;
+}
+
+.about > .about-section > .info-list {
+    margin: 0 0 24px 0;
+    list-style: none;
+}
+
+.about > .about-section > .info-list > li {
+    padding: 14px 0;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+}
+
+.about > .about-section > .info-list > * > strong {
+    font-family: 'Roboto Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.about > .about-section > .info-list > * > span {
+    font-family: 'Lora', serif;
+}
+
+.about > .skills-section > * > .sub-section > .bar {
+    background: #E0E0E0;
+}
+
+.about > .skills-section > * > .sub-section > .bar > .percent {
+    background: #1D220D;
+    height: 6px;
+}

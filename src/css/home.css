@@ -1,4 +1,8 @@
-.home-page > .home-text > h1 {
+.home {
+    position: absolute;
+}
+
+.home > .home-text > h1 {
     font-family: 'Roboto Mono', monospace;
     font-size: 48px;
     font-weight: bolder;
@@ -6,55 +10,16 @@
     text-transform: uppercase;
 }
 
-.home-page > .home-text > p {
+.home > .home-text > p {
     font-family: 'Lora', serif;
     font-size: 18px;
-    margin-top: 15px;
+    margin-top: 16px;
     margin-bottom: 0;
     font-weight: 300;
     font-style: italic;
     letter-spacing: 2px;
 }
 
-.home-page > .home-text > .home-btns {
+.home > .home-text > .home-btns {
     margin-top: 45px;
-}
-
-.home-page > .home-text > .home-btns > .btn-custom {
-    /* Fonts, Text & Spacing */
-    font-family: 'Open Sans', sans-serif;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 10px;
-    font-weight: bold;
-
-    /* Formatting */
-    display: inline-block;
-    line-height: 1em;
-    margin: 0 16px 8px 0;
-    padding: 16px 32px;
-    position: relative;
-
-    /* Backgrounds & Color */
-    background: transparent;
-    border: solid 1px #FFF;
-    
-    /* No select for text buttons */
-    -webkit-touch-callout: none; /* iOS Safari */
-        -webkit-user-select: none; /* Safari */
-        -khtml-user-select: none; /* Konqueror HTML */
-            -moz-user-select: none; /* Old versions of Firefox */
-            -ms-user-select: none; /* Internet Explorer/Edge */
-                user-select: none; /* Non-prefixed version, currently
-                                    supported by Chrome, Edge, Opera and Firefox */
-}
-
-.home-page > .home-text > .home-btns > .btn-custom:hover {
-    content: ' ';
-    position: relative;
-    background-color: #111;
-    opacity: 0.8;
-    transform: rotate(-4deg);
-    transition: all .3s cubic-bezier(.785,.135,.15,.86);
 }

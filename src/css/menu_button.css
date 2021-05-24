@@ -1,11 +1,11 @@
 .menu-btn{
 	font-size:0;
 	display:block;
-	position:absolute;
+	position:fixed;
 	top:20px;
 	right:20px;
-	padding:18px;
-	z-index:499;
+	padding:16px;
+	z-index: 5;
 }
 
 .menu-btn:hover .lines > span {
@@ -14,7 +14,7 @@
 
 .menu-btn > .lines{
 	display:block;
-	width:36px;
+	width:32px;
 }
 
 .menu-btn > .lines > span{
@@ -26,7 +26,7 @@
 }
 
 body.border-dark .menu-btn > .lines > span{
-	background:#303F9F;
+	background:#3B451B;
 }
 
 .menu-btn > .lines > .l2{
