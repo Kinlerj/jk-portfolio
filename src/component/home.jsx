@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import '../css/home.css'
 
 const homeButtons = [
-    { to: '/about', label: 'Discover More' }
-    //{ to: '/contact', label: 'Hire Me' }
+    { to: '/about', label: 'Discover More' },
+    { to: '/contact', label: 'Hire Me' }
   ];
 
 export default class Home extends Component {
@@ -31,7 +31,7 @@ export default class Home extends Component {
                     out: {opacity: 0}
                 }}
                 transition={{
-                    duration: 0.5,
+                    duration: 1,
                     when: "afterChildren"
                 }}
             >

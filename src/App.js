@@ -10,14 +10,14 @@ import SideMenu from './component/side_menu'
 
 import Home from './component/home'
 import About from './component/about'
-import Resume from './component/resume'
+import Experience from './component/experience'
+import Contact from './component/contact'
 
 class App extends Component{
   constructor(props) {
     super(props);
   
     this.state = {
-       page: "home",
        showPage: false,
        isMenuOpen: false
     }
@@ -45,7 +45,8 @@ class App extends Component{
                 <Switch location={location} key={location.pathname}>
                   <Route exact path="/" component={Home}/>
                   <Route path="/about" component={About} />
-                  <Route path="/resume" component={Resume} />
+                  <Route path="/experience" component={Experience} />
+                  <Route path="/contact" component={Contact} />
                 </Switch>
               </AnimatePresence>
             )

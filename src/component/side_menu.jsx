@@ -5,7 +5,8 @@ import '../css/side_menu.css'
 const menuOptions = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    { to: '/resume', label: 'Resume' }
+    { to: '/experience', label: 'Experience' },
+    { to: '/contact', label: 'Contact' }
   ];
 
 export default class SideMenu extends Component {

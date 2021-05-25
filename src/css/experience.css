@@ -7,6 +7,8 @@
 }
 
 .timeline-content {
+    margin-bottom: 20px;
+    margin-top: 20px;
     padding: 25px;
     border: solid 1px #B6B6B6;
     position: relative;
