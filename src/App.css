@@ -37,6 +37,66 @@
   }
 }
 
+/* Columns */
+
+@media (min-width: 992px) {
+  .left-column {
+    width: 48%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .left-column-small {
+    width: 30%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .left-column-large {
+    width: 60%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .right-column {
+    width: 48%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .right-column-small {
+    width: 30%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .right-column-large {
+    width: 60%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .sub-left-column {
+    width: 60%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+
+  .sub-right-column {
+    width: 30%;
+    float: left;
+
+    padding: 0 8px 0 8px;
+  }
+}
+
 /* Scrollbar Settings */
 
 ::-webkit-scrollbar{

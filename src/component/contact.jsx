@@ -17,7 +17,7 @@ export default class Contact extends Component {
         const details = contactInfo.map(({ icon, details }) => {
             return <div className="contact-info">
                 {icon}
-                <p>{details}</p>
+                <p className="text-block">{details}</p>
             </div>
         })
 

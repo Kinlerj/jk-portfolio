@@ -4,36 +4,6 @@
     }
 }
 
-@media (min-width: 992px) {
-    .about > * > .left-column {
-        width: 48%;
-        float: left;
-
-        padding: 0 8px 0 8px;
-    }
-
-    .about > * > .right-column {
-        width: 48%;
-        float: left;
-
-        padding: 0 8px 0 8px;
-    }
-
-    .about > * > .left-column-small {
-        width: 30%;
-        float: left;
-
-        padding: 0 8px 0 8px;
-    }
-
-    .about > * > .right-column-large {
-        width: 60%;
-        float: left;
-
-        padding: 0 8px 0 8px;
-    }
-}
-
 .about {
     text-align: left;
     align-items: unset;

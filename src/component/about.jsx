@@ -4,8 +4,8 @@ import { NavLink } from 'react-router-dom';
 import '../css/about.css'
 
 const aboutButtons = [
-    //{ to: '/resume', label: 'Download Resume' }
-    //{ to: '/contact', label: 'Hire Me' }
+    { to: '/experience', label: 'My Experience' },
+    { to: '/contact', label: 'Contact Me' }
 ];
 
 export default class About extends Component {
