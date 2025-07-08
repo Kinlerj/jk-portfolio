@@ -1,29 +1,47 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
+/**
+ * Root Layout Component - Main Application Structure
+ * 
+ * Features:
+ * - Global navigation state management
+ * - Theme provider for light/dark mode support
+ * - Menu button and side menu integration
+ * - Consistent layout across all pages
+ * - Stack navigation configuration
+ */
+
+import MenuButton from '@/components/common/menu_button';
+import SideMenu from '@/components/common/side_menu';
+import { useAppStyles } from '@/constants/design-system';
+import { useThemeColor } from '@/hooks/useThemeColor';
+import { ThemeProvider } from '@/hooks/useThemeProvider';
 import { Stack } from 'expo-router';
-import { StatusBar } from 'expo-status-bar';
-import 'react-native-reanimated';
+import React, { useState } from 'react';
+import { View } from 'react-native';
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+function RootLayoutContent() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const backgroundColor = useThemeColor({}, 'background');
+  const AppStyles = useAppStyles();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
-
-  if (!loaded) {
-    // Async font loading only occurs in development.
-    return null;
-  }
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-      <StatusBar style="auto" />
+    <View style={[AppStyles.rootContainer, { backgroundColor }]}>
+      <MenuButton onIconClick={toggleMenu} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+    </View>
+  );
+}export default function RootLayout() {
+  return (
+    <ThemeProvider>
+      <RootLayoutContent />
     </ThemeProvider>
   );
 }

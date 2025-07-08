@@ -21,8 +21,11 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "router": {
+        "mode": "hash"
+      }
     },
+    "homepage": "https://Kinlerj.github.io/jk-portfolio",
     "plugins": [
       "expo-router",
       [
