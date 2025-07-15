@@ -199,22 +199,14 @@ export const AppStyles = StyleSheet.create({
     transform: [{ rotate: '-4deg' }], // Use an array for multiple transforms
     // transition needs to be implemented with Animated API or Moti
   },
-  noselect: {
-    // These properties are web-specific and have no direct RN equivalent as user selection is different
-  },
 });
 
-// --- index.css (Global styles, mainly body/html) ---
 export const GlobalStyles = StyleSheet.create({
-  // body styles typically apply to the root View in RN
   body: {
     margin: 0,
-    fontFamily: 'RobotoSlab', // Ensure font is loaded with expo-font
+    fontFamily: 'RobotoSlab',
   },
-  // code styles for <Text> components that represent code
   code: {
-    fontFamily: 'SourceCodePro', // Ensure font is loaded with expo-font
+    fontFamily: 'SourceCodePro',
   },
-  // Fonts from @import url will need to be loaded via expo-font:
-  // Lora, Open Sans, Roboto Mono, Source Code Pro, Roboto Slab
 });

@@ -1,23 +1,45 @@
 // src/components/MenuButton/MenuButton.tsx
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { MenuButtonStyles } from '@/styles/menu_button'; // Import component-specific styles
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 
 interface MenuButtonProps {
   onIconClick: () => void;
-  // You might add an 'isOpen' prop here to animate the lines based on menu state
 }
 
 const MenuButton: React.FC<MenuButtonProps> = ({ onIconClick }) => {
   return (
-    <TouchableOpacity onPress={onIconClick} style={MenuButtonStyles.menuBtn}>
-      <View style={MenuButtonStyles.menuBtnLines}>
-        <View style={MenuButtonStyles.menuBtnLine} />
-        <View style={[MenuButtonStyles.menuBtnLine, MenuButtonStyles.menuBtnLine2]} />
-        <View style={MenuButtonStyles.menuBtnLine} />
+    <TouchableOpacity onPress={onIconClick} style={styles.menuBtn}>
+      <View style={styles.menuBtnLines}>
+        <View style={styles.menuBtnLine} />
+        <View style={[styles.menuBtnLine, styles.menuBtnLine2]} />
+        <View style={styles.menuBtnLine} />
       </View>
     </TouchableOpacity>
   );
 };
+
+const styles = StyleSheet.create({
+  menuBtn: {
+    position: 'absolute',
+    top: 20,
+    right: 20,
+    padding: 16,
+    zIndex: 5,
+  },
+  menuBtnLines: {
+    width: 32,
+  },
+  menuBtnLine: {
+    width: '100%',
+    height: 3,
+    backgroundColor: '#FFF',
+  },
+  menuBtnLine2: {
+    marginVertical: 6,
+  },
+  menuBtnLineBorderDark: {
+    backgroundColor: '#3B451B',
+  },
+});
 
 export default MenuButton;
