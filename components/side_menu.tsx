@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { View, TouchableOpacity, StyleSheet } from 'react-native';
-import Animated, { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { Spacing } from '@/styles/global';
 import { Href, useRouter } from 'expo-router';
+import React, { useEffect } from 'react';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 interface SideMenuProps {
   isOpen: boolean;
@@ -28,7 +29,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
 
   const animatedBackdropStyle = useAnimatedStyle(() => ({
     opacity: menuOpacity.value * 0.7,
-    display: menuOpacity.value > 0.01 ? 'flex' : 'none',
+    pointerEvents: menuOpacity.value > 0.01 ? 'auto' : 'none',
   }));
 
   useEffect(() => {
@@ -43,12 +44,10 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
 
   return (
     <>
-      {isOpen && (
-        <Animated.View
-          style={[styles.backdrop, animatedBackdropStyle]}
-          onTouchEnd={onClose}
-        />
-      )}
+      <Animated.View
+        style={[styles.backdrop, animatedBackdropStyle]}
+        onTouchEnd={onClose}
+      />
       <Animated.View style={[styles.sideMenuClosed, animatedMenuContainerStyle]}>
         <View style={styles.menuItems}>
           {menuItems.map((item) => (
@@ -87,7 +86,7 @@ const styles = StyleSheet.create({
   },
   sideMenuOpen: {
     height: '100%',
-    width: 300,
+    width: '20%',
     position: 'absolute',
     top: 0,
     right: 0,
@@ -96,8 +95,10 @@ const styles = StyleSheet.create({
     zIndex: 3,
   },
   menuItems: {
+    alignContent: 'flex-start',
     margin: 0,
     padding: 0,
+    paddingLeft: Spacing.lg,
     position: 'absolute',
     width: '100%',
     top: '50%',

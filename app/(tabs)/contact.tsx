@@ -1,6 +1,8 @@
 import AnimatedButton from '@/components/animated_button';
+import { useFadeInAnimation } from '@/styles/animations';
+import { AppStyles, Colors, Fonts, FontSizes, Spacing } from '@/styles/global';
 import React, { useState } from 'react';
-import { Alert, TextInput, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Alert, StyleSheet, TextInput, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 const contactInfo = [
@@ -21,97 +23,90 @@ export default function Contact() {
     setForm({ name: '', email: '', subject: '', message: '' });
   };
 
+  const { animatedStyle } = useFadeInAnimation();
+
   return (
-    <View style={styles.page}>
-      <View style={styles.sectionHeader}>
-        <Animated.Text style={styles.sectionHeaderH2}>Contact Me</Animated.Text>
-      </View>
-      <View>
-        {contactInfo.map((item, index) => (
-          <View key={index}>
-            <Animated.Text>{item.details}</Animated.Text>
-          </View>
-        ))}
-      </View>
-      <View style={styles.contactContainer}>
-        <View style={{ width: '100%' }}>
-          {['Name', 'Email', 'Subject', 'Message'].map((placeholder) => (
-            <TextInput
-              key={placeholder}
-              style={styles.textInput}
-              placeholder={placeholder}
-              placeholderTextColor="rgba(255,255,255,0.7)"
-              onChangeText={(text) => setForm((prev) => ({ ...prev, [placeholder.toLowerCase()]: text }))}
-            />
-          ))}
-          <AnimatedButton title="Send Message" onPress={handleSubmit}/>
+    <View style={AppStyles.page}>
+      <Animated.View style={ animatedStyle }>
+        <View style={AppStyles.sectionHeader}>
+          <Animated.Text style={AppStyles.sectionHeader2}>
+            <Animated.Text style={AppStyles.coloredText}>Contact </Animated.Text>Me
+          </Animated.Text>
         </View>
-      </View>
+        <View style={ AppStyles.subSectionContent }>
+          {contactInfo.map((item, index) => (
+            <View key={index}>
+              <Animated.Text style={styles.contactDetail}>{item.details}</Animated.Text>
+            </View>
+          ))}
+        </View>
+        <View style={styles.contactContainer}>
+          <View style={styles.formContent}>
+            {['Name', 'Email', 'Subject', 'Message'].map((placeholder) => (
+              <TextInput
+                key={placeholder}
+                style={[
+                  styles.textInput,
+                  placeholder === 'Message' && styles.messageInput
+                ]}
+                placeholder={placeholder}
+                placeholderTextColor={Colors.placeholder}
+                multiline={placeholder === 'Message'}
+                numberOfLines={placeholder === 'Message' ? 4 : 1}
+                textAlignVertical={placeholder === 'Message' ? 'top' : 'center'}
+                onChangeText={(text) => setForm((prev) => ({ ...prev, [placeholder.toLowerCase()]: text }))}
+              />
+            ))}
+            <View style={styles.buttonContainer}>
+              <AnimatedButton title="Send Message" onPress={handleSubmit} variant="primary"/>
+            </View>
+          </View>
+        </View>
+      </Animated.View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  page: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    opacity: 1,
-    position: 'absolute',
-    top: 22,
-    right: 22,
-    bottom: 22,
-    left: 22,
-  },
-  sectionHeader: {
-    fontFamily: 'RobotoMono',
-    fontSize: 28,
-    fontWeight: '200',
-    letterSpacing: 4,
-    textTransform: 'uppercase',
-    marginTop: 80,
-    marginBottom: 80,
-  },
-  sectionHeaderH2: {
-    fontWeight: '200',
-    margin: 0,
-  },
   contactContainer: {
-    padding: 15,
+    alignItems: 'center', // Center the container content
     borderRadius: 8,
-    backgroundColor: '#333',
-    marginBottom: 20,
+    backgroundColor: Colors.cardBackground,
+    marginBottom: Spacing.lg,
+    marginTop: Spacing.md,
+    padding: Spacing.lg, // Restore padding around the border
+    marginHorizontal: Spacing.xs, // Add some horizontal margin for breathing room
+  },
+  formContent: {
+    width: '100%',
+    maxWidth: 500, // Make it wider but not too wide on large screens
+  },
+  buttonContainer: {
+    alignItems: 'center', // Center the button
+    marginTop: Spacing.sm,
+  },
+  contactDetail: {
+    color: Colors.text,
+    fontSize: FontSizes.md,
+    fontFamily: Fonts.lora,
+    marginBottom: Spacing.xs,
   },
   textInput: {
-    fontFamily: 'Lora',
+    fontFamily: Fonts.lora,
     width: '100%',
     height: 48,
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: Spacing.md,
+    paddingVertical: Spacing.xs,
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: 'rgba(255, 255, 255, 0.1)',
-    color: '#FFF',
-    fontSize: 14,
-    lineHeight: 14 * 1.8,
-    marginBottom: 16,
+    borderColor: Colors.border,
+    color: Colors.text,
+    fontSize: FontSizes.sm,
+    lineHeight: FontSizes.sm * 1.8,
+    marginBottom: Spacing.md,
   },
-  btnCustom: {
-    fontFamily: 'OpenSans',
-    letterSpacing: 4,
-    textAlign: 'center',
-    textTransform: 'uppercase',
-    fontSize: 10,
-    fontWeight: 'bold',
-    marginRight: 16,
-    marginBottom: 8,
-    paddingVertical: 16,
-    paddingHorizontal: 32,
-    position: 'relative',
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-    borderColor: '#FFF',
-    color: '#FFF',
+  messageInput: {
+    height: 120, // Make message input much taller
+    paddingTop: Spacing.md, // Add top padding for better text positioning
   },
 });

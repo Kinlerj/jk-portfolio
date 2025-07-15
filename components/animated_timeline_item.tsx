@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, withDelay } from 'react-native-reanimated';
 import { MaterialIcons } from '@expo/vector-icons';
+import { Colors, FontSizes, Spacing } from '@/styles/global';
 
 interface TimelineItemProps {
   icon: 'school' | 'work';
@@ -39,32 +40,32 @@ const AnimatedTimelineItem: React.FC<TimelineItemProps> = ({ icon, title, subtit
 
 const styles = StyleSheet.create({
   container: {
-    marginBottom: 40,
+    marginBottom: Spacing.xxl,
   },
   iconContainer: {
-    marginBottom: 8,
+    marginBottom: Spacing.xs,
   },
   title: {
     fontWeight: 'bold',
     textTransform: 'uppercase',
     marginTop: 0,
-    marginBottom: 8,
-    color: '#FFF',
+    marginBottom: Spacing.xs,
+    color: Colors.text,
   },
   subtitle: {
     fontFamily: 'Lora',
     fontWeight: '400',
     textTransform: 'capitalize',
     marginTop: 0,
-    marginBottom: 8,
-    color: '#FFF',
+    marginBottom: Spacing.xs,
+    color: Colors.text,
   },
   text: {
     fontFamily: 'Lora',
-    fontSize: 14,
+    fontSize: FontSizes.sm,
     lineHeight: 25.2, // 1.8 * 14
-    marginBottom: 24,
-    color: '#FFF',
+    marginBottom: Spacing.xl,
+    color: Colors.text,
   },
 });
 

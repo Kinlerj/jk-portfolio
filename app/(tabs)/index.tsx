@@ -1,9 +1,9 @@
 import AnimatedButton from "@/components/animated_button";
-import { AppStyles } from "@/styles/global";
+import { useFadeInAnimation } from "@/styles/animations";
+import { AppStyles, Colors, Fonts, FontSizes, Spacing } from "@/styles/global";
 import { Href, useRouter } from "expo-router";
-import { useEffect } from "react";
-import { View, StyleSheet } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { StyleSheet, View } from "react-native";
+import Animated from "react-native-reanimated";
 
 const homeButtons = [
   { to: '/about', label: 'Discover More' },
@@ -12,27 +12,13 @@ const homeButtons = [
 
 export default function HomeScreen() {
   const router = useRouter();
-
-  // Create a shared value for opacity
-  const opacity = useSharedValue(0);
-
-  // Define an animated style
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      opacity: opacity.value,
-    };
-  });
-
-  // Animate on mount (fade in)
-  useEffect(() => {
-    opacity.value = withTiming(1, { duration: 500 });
-  }, [opacity]);
+  const { animatedStyle } = useFadeInAnimation();
 
   return (
-    <Animated.View style={[AppStyles.page, animatedStyle]}>
-      <View style={styles.homeText}>
-        <Animated.Text style={styles.homeTextH1}>I'm Joseph Kinler</Animated.Text>
-        <Animated.Text style={styles.homeTextP}>
+    <View style={AppStyles.page}>
+      <Animated.View style={[styles.homeText, animatedStyle]}>
+        <Animated.Text style={styles.homeTextHeader}>I'm Joseph Kinler</Animated.Text>
+        <Animated.Text style={styles.homeTextSubtitle}>
           A Friend, Dude and Buddy From Earth
         </Animated.Text>
         <View style={styles.homeBtns}>
@@ -46,40 +32,36 @@ export default function HomeScreen() {
             />
           ))}
         </View>
-      </View>
-    </Animated.View>
+      </Animated.View>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  home: {
-    position: 'absolute', // Relative to its parent
-    flex: 1, // Allows content to stretch/fill within the absolute position
-    alignItems: 'center', // Assuming home-text is centered
-    justifyContent: 'center', // Assuming home-text is vertically centered
-  },
   homeText: {
     alignItems: 'center', // Center text content
   },
-  homeTextH1: {
-    fontFamily: 'RobotoMono', // Ensure font is loaded
-    fontSize: 48,
-    fontWeight: 'bold', // 'bolder' is not a direct RN value, use 'bold'
+  homeTextHeader: {
+    color: Colors.text,
+    fontFamily: Fonts.robotoMono,
+    fontSize: FontSizes.xxl,
+    fontWeight: 'bold',
     letterSpacing: 8,
     textTransform: 'uppercase',
   },
-  homeTextP: {
-    fontFamily: 'Lora', // Ensure font is loaded
-    fontSize: 18,
-    marginTop: 16,
+  homeTextSubtitle: {
+    color: Colors.text,
+    fontFamily: Fonts.lora,
+    fontSize: FontSizes.lg,
+    marginTop: Spacing.md,
     marginBottom: 0,
     fontWeight: '300',
     fontStyle: 'italic',
     letterSpacing: 2,
   },
   homeBtns: {
-    marginTop: 45,
-    flexDirection: 'row', // To arrange buttons side-by-side
+    marginTop: Spacing.xxl,
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
   },

@@ -1,4 +1,5 @@
 // src/components/MenuButton/MenuButton.tsx
+import { Spacing } from '@/styles/global';
 import React from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 
@@ -21,9 +22,9 @@ const MenuButton: React.FC<MenuButtonProps> = ({ onIconClick }) => {
 const styles = StyleSheet.create({
   menuBtn: {
     position: 'absolute',
-    top: 20,
-    right: 20,
-    padding: 16,
+    top: Spacing.xl,
+    right: Spacing.xl,
+    padding: Spacing.lg,
     zIndex: 5,
   },
   menuBtnLines: {
