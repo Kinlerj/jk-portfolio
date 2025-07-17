@@ -1,4 +1,16 @@
-import { Colors, Fonts, FontSizes, Spacing } from '@/styles/global';
+/**
+ * Animated Button Component - Interactive UI Element
+ * 
+ * Features:
+ * - Smooth animations with React Native Reanimated
+ * - Multiple visual variants (primary/secondary)
+ * - Platform-specific hover effects for web
+ * - Customizable press interactions
+ * - Consistent styling with theme system
+ */
+
+import { Colors, Fonts, FontSizes, Spacing } from '@/constants/design-system';
+import { ButtonVariant } from '@/types';
 import React from 'react';
 import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated, {
@@ -12,7 +24,7 @@ import Animated, {
 interface AnimatedButtonProps {
   title: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary';
+  variant?: ButtonVariant;
 }
 
 const AnimatedButton: React.FC<AnimatedButtonProps> = ({ 
@@ -146,7 +158,7 @@ const styles = StyleSheet.create({
   btnBorder: {
     // Static border container - holds the border and defines overall button shape
     borderWidth: 1,
-    borderColor: Colors.button,
+    borderColor: Colors.white,
     borderRadius: 4,
     overflow: 'hidden',
   },
@@ -174,7 +186,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.xl,
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: Colors.button,
+    borderColor: Colors.white,
     borderRadius: 4,
     overflow: 'hidden',
   },
@@ -183,7 +195,7 @@ const styles = StyleSheet.create({
     borderColor: Colors.textHighlight,
   },
   btnText: {
-    color: Colors.text,
+    color: Colors.white,
     fontSize: FontSizes.sm,
     fontWeight: 'bold',
     textAlign: 'center',

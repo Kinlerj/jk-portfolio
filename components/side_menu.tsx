@@ -1,4 +1,16 @@
-import { Spacing } from '@/styles/global';
+/**
+ * Side Menu Component - Mobile Navigation
+ * 
+ * Features:
+ * - Animated slide-in menu with backdrop
+ * - Smooth transitions with React Native Reanimated
+ * - Touch-friendly navigation items
+ * - Responsive design for mobile devices
+ */
+
+import { MENU_ITEMS } from '@/constants';
+import { Spacing } from '@/constants/design-system';
+import { MenuItem } from '@/types';
 import { Href, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
@@ -8,13 +20,6 @@ interface SideMenuProps {
   isOpen: boolean;
   onClose: () => void;
 }
-
-const menuItems = [
-  { label: 'Home', path: '/' },
-  { label: 'About', path: '/about' },
-  { label: 'Contact', path: '/contact' },
-  { label: 'Experience', path: '/experience' },
-];
 
 const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
   const router = useRouter();
@@ -50,7 +55,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
       />
       <Animated.View style={[styles.sideMenuClosed, animatedMenuContainerStyle]}>
         <View style={styles.menuItems}>
-          {menuItems.map((item) => (
+          {MENU_ITEMS.map((item: MenuItem) => (
             <TouchableOpacity
               key={item.label}
               style={styles.menuItem}

@@ -1,7 +1,16 @@
-// src/components/MenuButton/MenuButton.tsx
-import { Spacing } from '@/styles/global';
+/**
+ * Menu Button Component - Hamburger Menu Toggle
+ * 
+ * Features:
+ * - Three-line hamburger menu icon
+ * - Touch-friendly interaction area
+ * - Consistent positioning and styling
+ * - Responsive design for mobile devices
+ */
+
+import { Spacing } from '@/constants/design-system';
 import React from 'react';
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
 interface MenuButtonProps {
   onIconClick: () => void;
