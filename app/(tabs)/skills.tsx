@@ -14,7 +14,7 @@ import PageWrapper from '@/components/common/page_wrapper';
 import SkillItem from '@/components/skill_item';
 import { SKILLS_BUTTONS, SKILLS_DATA } from '@/constants';
 import { useFadeInWithTranslateAnimation, usePageAnimations } from '@/constants/animations';
-import { AppStyles, Spacing } from '@/constants/design-system';
+import { Spacing, useAppStyles } from '@/constants/design-system';
 import React from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -22,6 +22,9 @@ import Animated from 'react-native-reanimated';
 export default function Skills() {
   const isMobile = Dimensions.get('window').width < 992;
   const { buttons, container, content, header } = usePageAnimations();
+  
+  // Get theme-aware styles
+  const AppStyles = useAppStyles();
 
   return (
     <PageWrapper

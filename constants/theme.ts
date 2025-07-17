@@ -15,21 +15,51 @@
 /**
  * Color palette for the application
  * Based on earth tones with high contrast for accessibility
+ * Now supports both light and dark themes
  */
 export const Colors = {
-  // Primary brand colors
-  textHighlight: '#9da28d',    // Sage green for accents and highlights
-  background: '#3B451B',       // Dark olive green background
-  white: '#d7d9d1',           // Off-white for text and borders
-  
-  // UI interaction colors
-  placeholder: 'rgba(255, 255, 255, 0.7)',  // Semi-transparent white
-  border: 'rgba(255, 255, 255, 0.1)',       // Subtle borders
-  cardBackground: '#333',                     // Dark card backgrounds
-  
-  // Skill visualization colors
-  skillBarBackground: '#E0E0E0',  // Light gray for skill bar backgrounds
-  skillBarFill: '#1D220D',        // Dark green for skill bar fills
+  light: {
+    // Primary brand colors
+    textHighlight: '#5d6b4f',    // Darker sage green for light theme
+    background: '#f8f9f6',       // Light warm off-white background
+    text: '#2c3e15',             // Dark olive green text
+    
+    // UI interaction colors
+    placeholder: 'rgba(44, 62, 21, 0.6)',     // Semi-transparent dark text
+    border: 'rgba(44, 62, 21, 0.15)',         // Subtle dark borders
+    cardBackground: '#ffffff',                  // Pure white card backgrounds
+    
+    // Skill visualization colors
+    skillBarBackground: '#e8eae5',  // Light sage gray for skill bar backgrounds
+    skillBarFill: '#5d6b4f',        // Dark sage green for skill bar fills
+  },
+  dark: {
+    // Primary brand colors (your current theme)
+    textHighlight: '#9da28d',    // Sage green for accents and highlights
+    background: '#3B451B',       // Dark olive green background
+    text: '#d7d9d1',            // Off-white for text and borders
+    
+    // UI interaction colors
+    placeholder: 'rgba(215, 217, 209, 0.7)',  // Semi-transparent white
+    border: 'rgba(215, 217, 209, 0.1)',       // Subtle borders
+    cardBackground: '#333',                     // Dark card backgrounds
+    
+    // Skill visualization colors
+    skillBarBackground: '#E0E0E0',  // Light gray for skill bar backgrounds
+    skillBarFill: '#1D220D',        // Dark green for skill bar fills
+  }
+} as const;
+
+// Legacy exports for backward compatibility
+export const LegacyColors = {
+  textHighlight: Colors.dark.textHighlight,
+  background: Colors.dark.background,
+  white: Colors.dark.text,
+  placeholder: Colors.dark.placeholder,
+  border: Colors.dark.border,
+  cardBackground: Colors.dark.cardBackground,
+  skillBarBackground: Colors.dark.skillBarBackground,
+  skillBarFill: Colors.dark.skillBarFill,
 } as const;
 
 // =============================================================================

@@ -7,7 +7,7 @@
  * - Flexible content rendering
  * - Theme-aware styling
  */
-import { AppStyles } from '@/constants/design-system';
+import { useAppStyles } from '@/constants/design-system';
 import React from 'react';
 import { ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -19,6 +19,8 @@ interface PageHeaderProps {
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ children, style, animatedStyle }) => {
+  const AppStyles = useAppStyles();
+  
   return (
     <Animated.View style={[AppStyles.contentPageHeader, style, animatedStyle]}>
       {children}

@@ -1,11 +1,28 @@
 /**
- * Contact Page - Get in Touch Form
+ * Contact Page - G  const { buttons, content, header } = usePageAnimations();
+  const [form, setForm] = useState<ContactFormData>({ 
+    name: '', 
+    email: '', 
+    subject: '', 
+    message: '' 
+  });
+  const themeColors = useLegacyColors();
+
+  const handleSubmit = () => {
+    if (Object.values(form).some((field) => !field)) {
+      Alert.alert('Error', 'Please fill in all fields.');
+      return;
+    }
+    Alert.alert('Success', 'Message sent (placeholder)');
+    setForm({ name: '', email: '', subject: '', message: '' });
+  };
  * 
  * Features:
  * - Contact form with validation
  * - Contact information display
  * - Form state management
  * - Animated elements with smooth transitions
+ * - Theme-aware styling
  */
 
 import AnimatedButton from '@/components/animated_button';
@@ -13,7 +30,8 @@ import PageHeader from '@/components/common/page_header';
 import PageWrapper from '@/components/common/page_wrapper';
 import { CONTACT_INFO } from '@/constants';
 import { useFadeInAnimation, usePageAnimations } from '@/constants/animations';
-import { AppStyles, Colors, Fonts, FontSizes, Spacing } from '@/constants/design-system';
+import { Fonts, FontSizes, Spacing, useAppStyles } from '@/constants/design-system';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { ContactFormData } from '@/types';
 import React, { useState } from 'react';
 import { Alert, StyleSheet, TextInput, View } from 'react-native';
@@ -27,6 +45,16 @@ export default function Contact() {
     subject: '', 
     message: '' 
   });
+
+  // Theme colors for styling
+  const textColor = useThemeColor({}, 'text');
+  const highlightColor = useThemeColor({}, 'textHighlight');
+  const cardBackground = useThemeColor({}, 'cardBackground');
+  const borderColor = useThemeColor({}, 'border');
+  const placeholderColor = useThemeColor({}, 'placeholder');
+  
+  // Get theme-aware styles
+  const AppStyles = useAppStyles();
 
   const handleSubmit = () => {
     if (Object.values(form).some((field) => !field)) {
@@ -51,14 +79,14 @@ export default function Contact() {
           <View style={AppStyles.subSectionContent}>
             {CONTACT_INFO.map((item, index) => (
               <View key={index}>
-                <Animated.Text style={styles.contactDetail}>{item.details}</Animated.Text>
+                <Animated.Text style={[styles.contactDetail, { color: textColor }]}>{item.details}</Animated.Text>
               </View>
             ))}
           </View>
         </Animated.View>
         
         {/* Contact Form */}
-        <Animated.View style={[styles.contactContainer, buttons.animatedStyle]}>
+        <Animated.View style={[styles.contactContainer, buttons.animatedStyle, { backgroundColor: cardBackground }]}>
           <Animated.Text style={AppStyles.sectionHeader}>
             Get <Animated.Text style={AppStyles.sectionHeaderHighlight}>In Touch</Animated.Text>
           </Animated.Text>
@@ -68,10 +96,14 @@ export default function Contact() {
                 key={placeholder}
                 style={[
                   styles.textInput,
-                  placeholder === 'Message' && styles.messageInput
+                  placeholder === 'Message' && styles.messageInput,
+                  { 
+                    borderColor: borderColor, 
+                    color: textColor 
+                  }
                 ]}
                 placeholder={placeholder}
-                placeholderTextColor={Colors.placeholder}
+                placeholderTextColor={placeholderColor}
                 multiline={placeholder === 'Message'}
                 numberOfLines={placeholder === 'Message' ? 4 : 1}
                 textAlignVertical={placeholder === 'Message' ? 'top' : 'center'}
@@ -96,7 +128,6 @@ const styles = StyleSheet.create({
   contactContainer: {
     alignItems: 'center',
     borderRadius: 8,
-    backgroundColor: Colors.cardBackground,
     marginBottom: Spacing.lg,
     marginTop: Spacing.md,
     //padding: Spacing.lg,
@@ -111,7 +142,6 @@ const styles = StyleSheet.create({
     marginTop: Spacing.sm,
   },
   contactDetail: {
-    color: Colors.white,
     fontSize: FontSizes.md,
     fontFamily: Fonts.lora,
     marginBottom: Spacing.xs,
@@ -124,8 +154,6 @@ const styles = StyleSheet.create({
     paddingVertical: Spacing.xs,
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: Colors.border,
-    color: Colors.white,
     fontSize: FontSizes.sm,
     lineHeight: FontSizes.sm * 1.8,
     marginBottom: Spacing.md,

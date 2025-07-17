@@ -5,11 +5,14 @@
  * - Animated slide-in menu with backdrop
  * - Smooth transitions with React Native Reanimated
  * - Touch-friendly navigation items
+ * - Theme toggle integration
  * - Responsive design for mobile devices
  */
 
+import ThemeToggle from '@/components/theme_toggle';
 import { MENU_ITEMS } from '@/constants';
 import { Spacing } from '@/constants/design-system';
+import { useThemeColor } from '@/hooks/useThemeColor';
 import { MenuItem } from '@/types';
 import { Href, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
@@ -27,6 +30,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
   const menuWidth = useSharedValue(0);
   const menuOpacity = useSharedValue(0);
 
+  // Theme colors
+  const backgroundColor = useThemeColor({}, 'cardBackground');
+  const textColor = useThemeColor({}, 'text');
+  const textHighlight = useThemeColor({}, 'textHighlight');
+
   const animatedMenuContainerStyle = useAnimatedStyle(() => ({
     width: menuWidth.value,
     opacity: menuOpacity.value,
@@ -40,7 +48,7 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
   useEffect(() => {
     if (isOpen) {
       menuWidth.value = withTiming(300, { duration: 300 });
-      menuOpacity.value = withTiming(0.9, { duration: 300 });
+      menuOpacity.value = withTiming(0.95, { duration: 300 });
     } else {
       menuWidth.value = withTiming(0, { duration: 300 });
       menuOpacity.value = withTiming(0, { duration: 300 });
@@ -53,7 +61,11 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
         style={[styles.backdrop, animatedBackdropStyle]}
         onTouchEnd={onClose}
       />
-      <Animated.View style={[styles.sideMenuClosed, animatedMenuContainerStyle]}>
+      <Animated.View style={[
+        styles.sideMenuClosed, 
+        animatedMenuContainerStyle,
+        { backgroundColor }
+      ]}>
         <View style={styles.menuItems}>
           {MENU_ITEMS.map((item: MenuItem) => (
             <TouchableOpacity
@@ -64,9 +76,19 @@ const SideMenu: React.FC<SideMenuProps> = ({ isOpen, onClose }) => {
                 router.push(item.path as Href);
               }}
             >
-              <Animated.Text style={styles.menuItemLink}>{item.label}</Animated.Text>
+              <Animated.Text style={[
+                styles.menuItemLink,
+                { color: textColor }
+              ]}>
+                {item.label}
+              </Animated.Text>
             </TouchableOpacity>
           ))}
+          
+          {/* Theme Toggle */}
+          <View style={styles.themeToggleContainer}>
+            <ThemeToggle />
+          </View>
         </View>
       </Animated.View>
     </>
@@ -85,7 +107,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    backgroundColor: '#111',
     opacity: 0.9,
     zIndex: 3,
   },
@@ -95,7 +116,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     right: 0,
-    backgroundColor: '#111',
     opacity: 0.9,
     zIndex: 3,
   },
@@ -117,10 +137,15 @@ const styles = StyleSheet.create({
     letterSpacing: 4,
     padding: 8,
     textTransform: 'uppercase',
-    color: '#cacaca',
+    fontSize: 16,
+    fontWeight: '500',
   },
   menuItemLinkHover: {
     color: '#f1f1f1',
+  },
+  themeToggleContainer: {
+    marginTop: Spacing.xl,
+    alignItems: 'flex-start',
   },
 });
 

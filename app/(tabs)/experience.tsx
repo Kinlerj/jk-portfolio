@@ -14,7 +14,7 @@ import PageHeader from '@/components/common/page_header';
 import PageWrapper from '@/components/common/page_wrapper';
 import { EXPERIENCE_BUTTONS, TIMELINE_ITEMS } from '@/constants';
 import { AnimationConfig, useFadeInWithTranslateAnimation, usePageAnimations } from '@/constants/animations';
-import { AppStyles, Spacing } from '@/constants/design-system';
+import { Spacing, useAppStyles } from '@/constants/design-system';
 import { AnimationTimings } from '@/constants/theme';
 import React from 'react';
 import { StyleSheet } from 'react-native';
@@ -22,6 +22,9 @@ import Animated from 'react-native-reanimated';
 
 export default function Experience() {
   const { buttons, container, header, content } = usePageAnimations();
+  
+  // Get theme-aware styles
+  const AppStyles = useAppStyles();
   
   // Timeline end text with extended delay
   const endTextAnimation = useFadeInWithTranslateAnimation(

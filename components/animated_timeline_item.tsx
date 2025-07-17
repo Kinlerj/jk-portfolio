@@ -7,10 +7,12 @@
  * - Visual hierarchy with icons and typography
  * - Skill tags with color coding
  * - Responsive card layout with shadow effects
+ * - Theme-aware styling
  */
 
-import { Colors, Fonts, FontSizes, Spacing } from '@/constants/design-system';
+import { Fonts, FontSizes, Spacing } from '@/constants/design-system';
 import { TimelineIcon } from '@/types';
+import { useLegacyColors } from '@/utils/theme-migration';
 import { MaterialIcons } from '@expo/vector-icons';
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -39,6 +41,7 @@ const AnimatedTimelineItem: React.FC<TimelineItemProps> = ({
 }) => {
   const opacity = useSharedValue(0);
   const translateY = useSharedValue(20);
+  const themeColors = useLegacyColors();
 
   const animatedStyle = useAnimatedStyle(() => ({
     opacity: opacity.value,
@@ -53,15 +56,15 @@ const AnimatedTimelineItem: React.FC<TimelineItemProps> = ({
   return (
     <Animated.View style={[styles.container, animatedStyle]}>
       {/* Card wrapper with enhanced styling */}
-      <View style={styles.card}>
+      <View style={[styles.card, { backgroundColor: themeColors.cardBackground }]}>
         {/* Header section with icon and title */}
         <View style={styles.header}>
-          <View style={styles.iconContainer}>
-            <MaterialIcons name={icon} size={28} color={Colors.textHighlight} />
+          <View style={[styles.iconContainer, { borderLeftColor: themeColors.textHighlight }]}>
+            <MaterialIcons name={icon} size={28} color={themeColors.textHighlight} />
           </View>
           <View style={styles.headerText}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>
+            <Text style={[styles.title, { color: themeColors.white }]}>{title}</Text>
+            <Text style={[styles.subtitle, { color: themeColors.textHighlight }]}>{subtitle}</Text>
           </View>
         </View>
 
@@ -70,30 +73,30 @@ const AnimatedTimelineItem: React.FC<TimelineItemProps> = ({
           <View style={styles.metaContainer}>
             {period && (
               <View style={styles.metaItem}>
-                <MaterialIcons name="schedule" size={16} color={Colors.textHighlight} />
-                <Text style={styles.metaText}>{period}</Text>
+                <MaterialIcons name="schedule" size={16} color={themeColors.textHighlight} />
+                <Text style={[styles.metaText, { color: themeColors.white }]}>{period}</Text>
               </View>
             )}
             {location && (
               <View style={styles.metaItem}>
-                <MaterialIcons name="place" size={16} color={Colors.textHighlight} />
-                <Text style={styles.metaText}>{location}</Text>
+                <MaterialIcons name="place" size={16} color={themeColors.textHighlight} />
+                <Text style={[styles.metaText, { color: themeColors.white }]}>{location}</Text>
               </View>
             )}
           </View>
         )}
 
         {/* Description */}
-        <Text style={styles.text}>{text}</Text>
+        <Text style={[styles.text, { color: themeColors.white }]}>{text}</Text>
 
         {/* Skills section */}
         {skills && skills.length > 0 && (
           <View style={styles.skillsContainer}>
-            <Text style={styles.skillsLabel}>Key Skills:</Text>
+            <Text style={[styles.skillsLabel, { color: themeColors.textHighlight }]}>Key Skills:</Text>
             <View style={styles.skillsGrid}>
               {skills.map((skill, index) => (
-                <View key={index} style={styles.skillTag}>
-                  <Text style={styles.skillText}>{skill}</Text>
+                <View key={index} style={[styles.skillTag, { backgroundColor: themeColors.textHighlight }]}>
+                  <Text style={[styles.skillText, { color: themeColors.background }]}>{skill}</Text>
                 </View>
               ))}
             </View>
@@ -110,11 +113,9 @@ const styles = StyleSheet.create({
   },
   // Enhanced card styling
   card: {
-    backgroundColor: Colors.cardBackground,
     borderRadius: 8,
     padding: Spacing.lg,
     borderLeftWidth: 4,
-    borderLeftColor: Colors.textHighlight,
     shadowColor: '#000',
     shadowOffset: {
       width: 0,
@@ -144,13 +145,11 @@ const styles = StyleSheet.create({
     fontSize: FontSizes.lg,
     letterSpacing: 1,
     marginBottom: Spacing.xs,
-    color: Colors.white,
   },
   subtitle: {
     fontFamily: Fonts.lora,
     fontWeight: '600',
     fontSize: FontSizes.md,
-    color: Colors.textHighlight,
     marginBottom: 0,
   },
   // Meta information
@@ -167,7 +166,6 @@ const styles = StyleSheet.create({
   metaText: {
     fontFamily: Fonts.robotoMono,
     fontSize: FontSizes.sm,
-    color: Colors.white,
     marginLeft: Spacing.xs,
     opacity: 0.8,
   },
@@ -176,7 +174,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.lora,
     fontSize: FontSizes.sm,
     lineHeight: 24,
-    color: Colors.white,
     marginBottom: Spacing.md,
   },
   // Skills section
@@ -187,7 +184,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.robotoMono,
     fontSize: FontSizes.sm,
     fontWeight: 'bold',
-    color: Colors.textHighlight,
     textTransform: 'uppercase',
     letterSpacing: 1,
     marginBottom: Spacing.sm,
@@ -198,7 +194,6 @@ const styles = StyleSheet.create({
     gap: Spacing.xs,
   },
   skillTag: {
-    backgroundColor: Colors.textHighlight,
     paddingHorizontal: Spacing.sm,
     paddingVertical: Spacing.xs,
     borderRadius: 12,
@@ -209,7 +204,6 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.robotoMono,
     fontSize: FontSizes.sm,
     fontWeight: '500',
-    color: Colors.background,
     textTransform: 'uppercase',
     letterSpacing: 0.5,
   },

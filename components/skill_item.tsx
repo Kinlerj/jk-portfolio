@@ -7,10 +7,12 @@
  * - Skill level classification system
  * - Responsive design with consistent spacing
  * - Animated entry effects
+ * - Theme-aware styling
  */
 
-import { Colors, Fonts, FontSizes, Spacing } from '@/constants/design-system';
+import { Fonts, FontSizes, Spacing } from '@/constants/design-system';
 import { ExperienceType, SkillLevel } from '@/types';
+import { useLegacyColors } from '@/utils/theme-migration';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated from 'react-native-reanimated';
@@ -32,24 +34,26 @@ const SkillItem: React.FC<SkillItemProps> = ({
   proficiencyPercent,
   animatedStyle
 }) => {
+  const themeColors = useLegacyColors();
+  
   const getLevelColor = (level: string) => {
     switch (level) {
-      case 'Expert': return Colors.textHighlight;
+      case 'Expert': return themeColors.textHighlight;
       case 'Advanced': return '#4CAF50';
       case 'Intermediate': return '#FF9800';
       case 'Beginner': return '#F44336';
-      default: return Colors.white;
+      default: return themeColors.white;
     }
   };
 
   const getExperienceTypeColor = (type: string) => {
     switch (type) {
-      case 'Professional': return Colors.textHighlight;
+      case 'Professional': return themeColors.textHighlight;
       case 'Recent': return '#2196F3';
       case 'Academic': return '#9C27B0';
       case 'Hobby': return '#FF5722';
       case 'Personal': return '#607D8B';
-      default: return Colors.white;
+      default: return themeColors.white;
     }
   };
 
@@ -63,11 +67,11 @@ const SkillItem: React.FC<SkillItemProps> = ({
   };
 
   return (
-    <Animated.View style={[styles.skillContainer, animatedStyle]}>
+    <Animated.View style={[styles.skillContainer, animatedStyle, { backgroundColor: themeColors.cardBackground, borderLeftColor: themeColors.textHighlight }]}>
       <View style={styles.skillHeader}>
-        <Animated.Text style={styles.skillName}>{skillName}</Animated.Text>
+        <Animated.Text style={[styles.skillName, { color: themeColors.white }]}>{skillName}</Animated.Text>
         <View style={styles.skillInfo}>
-          <Animated.Text style={styles.experience}>{experience}</Animated.Text>
+          <Animated.Text style={[styles.experience, { color: themeColors.white }]}>{experience}</Animated.Text>
           <Animated.Text style={[styles.experienceType, { color: getExperienceTypeColor(experienceType) }]}>
             {experienceType}
           </Animated.Text>
@@ -79,22 +83,22 @@ const SkillItem: React.FC<SkillItemProps> = ({
           <Animated.Text style={[styles.level, { color: getLevelColor(level) }]}>
             {level}
           </Animated.Text>
-          <Animated.Text style={styles.proficiencyText}>
+          <Animated.Text style={[styles.proficiencyText, { color: themeColors.textHighlight }]}>
             {getProficiencyText(proficiencyPercent)}
           </Animated.Text>
         </View>
       </View>
       
       <View style={styles.progressBarContainer}>
-        <View style={styles.progressBarBackground}>
+        <View style={[styles.progressBarBackground, { backgroundColor: themeColors.skillBarBackground }]}>
           <Animated.View 
             style={[
               styles.progressBarFill, 
-              { width: `${proficiencyPercent}%` }
+              { width: `${proficiencyPercent}%`, backgroundColor: themeColors.textHighlight }
             ]} 
           />
         </View>
-        <Animated.Text style={styles.percentageText}>{proficiencyPercent}%</Animated.Text>
+        <Animated.Text style={[styles.percentageText, { color: themeColors.white }]}>{proficiencyPercent}%</Animated.Text>
       </View>
     </Animated.View>
   );
@@ -104,10 +108,8 @@ const styles = StyleSheet.create({
   skillContainer: {
     marginBottom: Spacing.lg,
     padding: Spacing.md,
-    backgroundColor: Colors.cardBackground,
     borderRadius: 8,
     borderLeftWidth: 3,
-    borderLeftColor: Colors.textHighlight,
     flex: 1,
     minWidth: 280,
     maxWidth: 320,
@@ -120,7 +122,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   skillName: {
-    color: Colors.white,
     fontFamily: Fonts.robotoMono,
     fontSize: FontSizes.lg,
     fontWeight: 'bold',
@@ -134,7 +135,6 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   experience: {
-    color: Colors.white,
     fontFamily: Fonts.lora,
     fontSize: FontSizes.sm,
     marginBottom: Spacing.xs / 2,
@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   },
   proficiencyText: {
-    color: Colors.textHighlight,
     fontFamily: Fonts.lora,
     fontSize: FontSizes.sm,
     fontStyle: 'italic',
@@ -178,17 +177,14 @@ const styles = StyleSheet.create({
   progressBarBackground: {
     flex: 1,
     height: 8,
-    backgroundColor: Colors.skillBarBackground,
     borderRadius: 4,
     overflow: 'hidden',
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: Colors.textHighlight,
     borderRadius: 4,
   },
   percentageText: {
-    color: Colors.white,
     fontFamily: Fonts.robotoMono,
     fontSize: FontSizes.sm,
     fontWeight: 'bold',

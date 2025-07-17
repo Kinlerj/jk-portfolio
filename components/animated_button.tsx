@@ -7,10 +7,12 @@
  * - Platform-specific hover effects for web
  * - Customizable press interactions
  * - Consistent styling with theme system
+ * - Theme-aware styling
  */
 
-import { Colors, Fonts, FontSizes, Spacing } from '@/constants/design-system';
+import { Fonts, FontSizes, Spacing } from '@/constants/design-system';
 import { ButtonVariant } from '@/types';
+import { useLegacyColors } from '@/utils/theme-migration';
 import React from 'react';
 import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import Animated, {
@@ -36,6 +38,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
   const rotate = useSharedValue(0);
   const darkenValue = useSharedValue(0);
   const isPressed = useSharedValue(false);
+  const themeColors = useLegacyColors();
 
   const handlePressIn = () => {
     'worklet';
@@ -90,7 +93,7 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
 
   // Animated style for the inner content (background + text)
   const animatedContentStyle = useAnimatedStyle(() => {
-    const baseColor = variant === 'primary' ? Colors.textHighlight : 'transparent';
+    const baseColor = variant === 'primary' ? themeColors.textHighlight : 'transparent';
     
     return {
       transform: [
@@ -133,12 +136,14 @@ const AnimatedButton: React.FC<AnimatedButtonProps> = ({
     >
       <Animated.View style={[
         styles.btnBorder, 
-        variant === 'primary' && { borderColor: Colors.textHighlight },
+        variant === 'primary' && { borderColor: themeColors.textHighlight },
+        { borderColor: variant === 'primary' ? themeColors.textHighlight : themeColors.white },
         animatedButtonStyle
       ]}>
         <Animated.View style={[styles.btnContent, animatedContentStyle]}>
           <Text style={[
-            styles.btnText, 
+            styles.btnText,
+            { color: variant === 'primary' ? themeColors.background : themeColors.white },
             variant === 'primary' && styles.btnTextPrimary
           ]}>
             {title}
@@ -158,7 +163,6 @@ const styles = StyleSheet.create({
   btnBorder: {
     // Static border container - holds the border and defines overall button shape
     borderWidth: 1,
-    borderColor: Colors.white,
     borderRadius: 4,
     overflow: 'hidden',
   },
@@ -186,22 +190,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: Spacing.xl,
     backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: Colors.white,
     borderRadius: 4,
     overflow: 'hidden',
   },
   btnPrimary: {
-    backgroundColor: Colors.textHighlight,
-    borderColor: Colors.textHighlight,
+    // Will be applied dynamically
   },
   btnText: {
-    color: Colors.white,
     fontSize: FontSizes.sm,
     fontWeight: 'bold',
     textAlign: 'center',
   },
   btnTextPrimary: {
-    color: Colors.background, // Dark text on bright background for better contrast
+    // Color will be applied dynamically
   },
 });
 
