@@ -31,44 +31,22 @@ import {
  * Combines all style categories into a single object
  */
 export function useAppStyles() {
-  const layoutStyles = useLayoutStyles();
-  const decorationStyles = useDecorationStyles();
-  const typographyStyles = useTypographyStyles();
-  const utilityStyles = useUtilityStyles();
+	const layoutStyles = useLayoutStyles();
+	const decorationStyles = useDecorationStyles();
+	const typographyStyles = useTypographyStyles();
+	const utilityStyles = useUtilityStyles();
 
-  return {
-    // Layout styles
-    ...layoutStyles,
-    
-    // Decoration styles
-    ...decorationStyles,
-    
-    // Typography styles
-    ...typographyStyles,
-    
-    // Utility styles
-    ...utilityStyles,
-  };
+	return {
+		// Layout styles
+		...layoutStyles,
+
+		// Decoration styles
+		...decorationStyles,
+
+		// Typography styles
+		...typographyStyles,
+
+		// Utility styles
+		...utilityStyles,
+	};
 }
-
-// Legacy AppStyles object for backward compatibility
-export const AppStyles = {
-  get rootContainer() { throw new Error('Use useAppStyles() hook instead'); },
-  get page() { throw new Error('Use useAppStyles() hook instead'); },
-  get pageFrame() { throw new Error('Use useAppStyles() hook instead'); },
-  get pageContent() { throw new Error('Use useAppStyles() hook instead'); },
-  get pageScrollView() { throw new Error('Use useAppStyles() hook instead'); },
-  get pageScrollContent() { throw new Error('Use useAppStyles() hook instead'); },
-  get cornerCutTopLeft() { throw new Error('Use useAppStyles() hook instead'); },
-  get cornerCutTopRight() { throw new Error('Use useAppStyles() hook instead'); },
-  get cornerCutBottomLeft() { throw new Error('Use useAppStyles() hook instead'); },
-  get cornerCutBottomRight() { throw new Error('Use useAppStyles() hook instead'); },
-  get contentPageHeader() { throw new Error('Use useAppStyles() hook instead'); },
-  get contentPageHeaderHighlight() { throw new Error('Use useAppStyles() hook instead'); },
-  get section() { throw new Error('Use useAppStyles() hook instead'); },
-  get sectionHeader() { throw new Error('Use useAppStyles() hook instead'); },
-  get sectionHeaderHighlight() { throw new Error('Use useAppStyles() hook instead'); },
-  get subSectionContent() { throw new Error('Use useAppStyles() hook instead'); },
-  get bottomFadeOverlay() { throw new Error('Use useAppStyles() hook instead'); },
-  get fadeElement() { throw new Error('Use useAppStyles() hook instead'); },
-};

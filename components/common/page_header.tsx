@@ -13,19 +13,19 @@ import { ViewStyle } from 'react-native';
 import Animated from 'react-native-reanimated';
 
 interface PageHeaderProps {
-  children: React.ReactNode;
-  style?: ViewStyle;
-  animatedStyle?: any;
+	children: React.ReactNode;
+	style?: ViewStyle;
+	animatedStyle?: any;
 }
 
 const PageHeader: React.FC<PageHeaderProps> = ({ children, style, animatedStyle }) => {
-  const AppStyles = useAppStyles();
-  
-  return (
-    <Animated.View style={[AppStyles.contentPageHeader, style, animatedStyle]}>
-      {children}
-    </Animated.View>
-  );
+	const AppStyles = useAppStyles();
+
+	return (
+		<Animated.View style={[AppStyles.contentPageHeader, style, animatedStyle]}>
+			{children}
+		</Animated.View>
+	);
 };
 
 export default PageHeader;

@@ -9,8 +9,8 @@
  * - Stack navigation configuration
  */
 
-import MenuButton from '@/components/menu_button';
-import SideMenu from '@/components/side_menu';
+import MenuButton from '@/components/common/menu_button';
+import SideMenu from '@/components/common/side_menu';
 import { useAppStyles } from '@/constants/design-system';
 import { useThemeColor } from '@/hooks/useThemeColor';
 import { ThemeProvider } from '@/hooks/useThemeProvider';

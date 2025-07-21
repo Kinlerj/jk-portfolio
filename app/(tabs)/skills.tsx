@@ -65,10 +65,12 @@ export default function Skills() {
 const styles = StyleSheet.create({
   skillsMobile: {
     // Additional mobile-specific styling (padding handled by global styles)
+    paddingBottom: 80, // Fixed padding to account for floating footer height
   },
   skills: {
     textAlign: 'left',
-    // Additional desktop-specific styling (padding handled by global styles)
+    // Additional desktop-specific styling (padding handled by global styles)  
+    paddingBottom: 80, // Fixed padding to account for floating footer height
   },
   // Skills-focused layout
   skillsContainer: {

@@ -20,20 +20,20 @@ import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from 'react-n
  * Centralized animation configuration for consistent timing and behavior
  */
 export const AnimationConfig = {
-  duration: 500,
-  delays: {
-    none: AnimationTimings.IMMEDIATE,
-    short: AnimationTimings.SHORT,
-    medium: AnimationTimings.MEDIUM,
-    long: AnimationTimings.LONG,
-    veryLong: AnimationTimings.VERY_LONG,
-    timeline: AnimationTimings.TIMELINE_END,
-  },
-  translate: {
-    small: 20,
-    medium: 30,
-    large: 50,
-  },
+	duration: 500,
+	delays: {
+		none: AnimationTimings.IMMEDIATE,
+		short: AnimationTimings.SHORT,
+		medium: AnimationTimings.MEDIUM,
+		long: AnimationTimings.LONG,
+		veryLong: AnimationTimings.VERY_LONG,
+		timeline: AnimationTimings.TIMELINE_END,
+	},
+	translate: {
+		small: 20,
+		medium: 30,
+		large: 50,
+	},
 } as const;
 
 // =============================================================================
@@ -46,17 +46,17 @@ export const AnimationConfig = {
  * @returns Animated style and opacity value
  */
 export const useFadeInAnimation = (delay: number = 0) => {
-  const opacity = useSharedValue(0);
+	const opacity = useSharedValue(0);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
+	const animatedStyle = useAnimatedStyle(() => ({
+		opacity: opacity.value,
+	}));
 
-  useEffect(() => {
-    opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
-  }, [delay, opacity]);
+	useEffect(() => {
+		opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
+	}, [delay, opacity]);
 
-  return { animatedStyle, opacity };
+	return { animatedStyle, opacity };
 };
 
 /**
@@ -66,23 +66,23 @@ export const useFadeInAnimation = (delay: number = 0) => {
  * @returns Animated style and shared values
  */
 export const useFadeInWithTranslateAnimation = (
-  translateY: number = AnimationConfig.translate.small,
-  delay: number = 0
+	translateY: number = AnimationConfig.translate.small,
+	delay: number = 0
 ) => {
-  const opacity = useSharedValue(0);
-  const translateYValue = useSharedValue(translateY);
+	const opacity = useSharedValue(0);
+	const translateYValue = useSharedValue(translateY);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-    transform: [{ translateY: translateYValue.value }],
-  }));
+	const animatedStyle = useAnimatedStyle(() => ({
+		opacity: opacity.value,
+		transform: [{ translateY: translateYValue.value }],
+	}));
 
-  useEffect(() => {
-    opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
-    translateYValue.value = withDelay(delay, withTiming(0, { duration: AnimationConfig.duration }));
-  }, [delay, opacity, translateYValue]);
+	useEffect(() => {
+		opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
+		translateYValue.value = withDelay(delay, withTiming(0, { duration: AnimationConfig.duration }));
+	}, [delay, opacity, translateYValue]);
 
-  return { animatedStyle, opacity, translateY: translateYValue };
+	return { animatedStyle, opacity, translateY: translateYValue };
 };
 
 // =============================================================================
@@ -94,17 +94,17 @@ export const useFadeInWithTranslateAnimation = (
  * @returns Animation objects for container, header, content, and buttons
  */
 export const usePageAnimations = () => {
-  const container = useFadeInAnimation(AnimationConfig.delays.none);
-  const header = useFadeInWithTranslateAnimation(-AnimationConfig.translate.small, AnimationConfig.delays.short);
-  const content = useFadeInWithTranslateAnimation(AnimationConfig.translate.small, AnimationConfig.delays.medium);
-  const buttons = useFadeInAnimation(AnimationConfig.delays.long);
+	const container = useFadeInAnimation(AnimationConfig.delays.none);
+	const header = useFadeInWithTranslateAnimation(-AnimationConfig.translate.small, AnimationConfig.delays.short);
+	const content = useFadeInWithTranslateAnimation(AnimationConfig.translate.small, AnimationConfig.delays.medium);
+	const buttons = useFadeInAnimation(AnimationConfig.delays.long);
 
-  return {
-    container,
-    header,
-    content,
-    buttons,
-  };
+	return {
+		container,
+		header,
+		content,
+		buttons,
+	};
 };
 
 /**
@@ -114,12 +114,12 @@ export const usePageAnimations = () => {
  * @returns Array of animation objects
  */
 export const useStaggeredAnimations = (itemCount: number, baseDelay: number = AnimationConfig.delays.long) => {
-  return Array.from({ length: itemCount }, (_, index) => 
-    useFadeInWithTranslateAnimation(
-      AnimationConfig.translate.small, 
-      baseDelay + index * 300
-    )
-  );
+	return Array.from({ length: itemCount }, (_, index) =>
+		useFadeInWithTranslateAnimation(
+			AnimationConfig.translate.small,
+			baseDelay + index * 300
+		)
+	);
 };
 
 // =============================================================================
@@ -132,17 +132,17 @@ export const useStaggeredAnimations = (itemCount: number, baseDelay: number = An
  * @returns Animation object with trigger function
  */
 export const createFadeInAnimation = (delay: number = 0) => {
-  const opacity = useSharedValue(0);
-  
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
+	const opacity = useSharedValue(0);
 
-  const trigger = () => {
-    opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
-  };
+	const animatedStyle = useAnimatedStyle(() => ({
+		opacity: opacity.value,
+	}));
 
-  return { animatedStyle, trigger, opacity };
+	const trigger = () => {
+		opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
+	};
+
+	return { animatedStyle, trigger, opacity };
 };
 
 /**
@@ -152,21 +152,21 @@ export const createFadeInAnimation = (delay: number = 0) => {
  * @returns Animation object with trigger function
  */
 export const createFadeInWithTranslateAnimation = (
-  translateY: number = AnimationConfig.translate.small,
-  delay: number = 0
+	translateY: number = AnimationConfig.translate.small,
+	delay: number = 0
 ) => {
-  const opacity = useSharedValue(0);
-  const translateYValue = useSharedValue(translateY);
+	const opacity = useSharedValue(0);
+	const translateYValue = useSharedValue(translateY);
 
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-    transform: [{ translateY: translateYValue.value }],
-  }));
+	const animatedStyle = useAnimatedStyle(() => ({
+		opacity: opacity.value,
+		transform: [{ translateY: translateYValue.value }],
+	}));
 
-  const trigger = () => {
-    opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
-    translateYValue.value = withDelay(delay, withTiming(0, { duration: AnimationConfig.duration }));
-  };
+	const trigger = () => {
+		opacity.value = withDelay(delay, withTiming(1, { duration: AnimationConfig.duration }));
+		translateYValue.value = withDelay(delay, withTiming(0, { duration: AnimationConfig.duration }));
+	};
 
-  return { animatedStyle, trigger, opacity, translateY: translateYValue };
+	return { animatedStyle, trigger, opacity, translateY: translateYValue };
 };

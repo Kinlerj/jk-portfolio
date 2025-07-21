@@ -34,7 +34,7 @@ export default function Experience() {
 
   return (
     <PageWrapper centered scrollable>
-      <Animated.View style={container.animatedStyle}>
+      <Animated.View style={[container.animatedStyle, styles.containerWithPadding]}>
         <PageHeader animatedStyle={header.animatedStyle}>
           My <Animated.Text style={AppStyles.contentPageHeaderHighlight}>Journey</Animated.Text>
         </PageHeader>
@@ -68,6 +68,9 @@ export default function Experience() {
 };
 
 const styles = StyleSheet.create({
+  containerWithPadding: {
+    paddingBottom: 80, // Fixed padding to account for floating footer height
+  },
   timelineContent: {
     marginBottom: Spacing.xxl,
   },
